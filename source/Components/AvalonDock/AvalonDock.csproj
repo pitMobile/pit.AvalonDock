@@ -6,10 +6,10 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>sn.snk</AssemblyOriginatorKeyFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.60.1</Version>
-    <AssemblyVersion>4.60.1</AssemblyVersion>
-    <FileVersion>4.60.1</FileVersion>
-    <PackageVersion>4.60.1</PackageVersion>
+    <Version>4.60.2</Version>
+    <AssemblyVersion>4.60.2</AssemblyVersion>
+    <FileVersion>4.60.2</FileVersion>
+    <PackageVersion>4.60.2</PackageVersion>
     <Company>pit - cup GmbH</Company>
     <Product>pit.AvalonDock</Product>
     <Copyright></Copyright>
