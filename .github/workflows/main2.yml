@@ -1,0 +1,12 @@
+# Setup enclave ready for signing
+- name: Setup Enclave
+  uses: enclave-networks/setup-enclave@v1
+  with:
+    # The enrolment key to enrol with (should be an Ephemeral key)
+    enrolment-key: ${{ secrets.ENCLAVE_ENROLMENT_KEY }}
+ 
+# The enclave binary is placed on the path.
+# Use the waitfor verb to pause until an Enclave connection is established to
+# a named resource.
+- name: Wait for Connection to your resource
+  run: enclave waitfor my-server.enclave
