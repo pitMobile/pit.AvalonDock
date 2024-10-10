@@ -1,4 +1,4 @@
-﻿/************************************************************************
+/************************************************************************
    AvalonDock
 
    Copyright (C) 2007-2013 Xceed Software Inc.
@@ -8,6 +8,7 @@
  ************************************************************************/
 
 using AvalonDock.Layout;
+
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -107,6 +108,27 @@ namespace AvalonDock.Controls
 			base.OnMouseRightButtonDown(e);
 			if (!e.Handled && _model.SelectedContent != null)
 				_model.SelectedContent.IsActive = true;
+		}
+
+		protected override void OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs e)
+		{
+			base.OnMouseLeftButtonUp(e);
+		}
+
+		protected override void OnPreviewMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs e)
+		{
+			base.OnPreviewMouseLeftButtonUp(e);
+		}
+
+		protected override void OnDrop(DragEventArgs e)
+		{
+			base.OnDrop(e);
+			SetIsActive();
+		}
+
+		private void SetIsActive()
+		{
+			_model.SelectedContent.IsActive = true;
 		}
 
 		protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)

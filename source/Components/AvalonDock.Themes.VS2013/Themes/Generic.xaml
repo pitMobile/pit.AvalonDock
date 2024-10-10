@@ -191,6 +191,7 @@
     <!--  DocumentPaneControlStyle  -->
     <Style x:Key="AvalonDockThemeVs2013DocumentPaneControlStyle" TargetType="{x:Type avalonDockControls:LayoutDocumentPaneControl}">
         <Setter Property="BorderBrush" Value="{x:Null}" />
+		<Setter Property="AllowDrop" Value="True"/>
 		<Setter Property="Background" Value="{DynamicResource {x:Static reskeys:ResourceKeys.TabBackground}}" />
 		<Setter Property="Template">
             <Setter.Value>
@@ -394,7 +395,10 @@
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <avalonDockControls:LayoutDocumentControl Model="{Binding}" />
+                    <avalonDockControls:LayoutDocumentControl Model="{Binding}" AllowDrop="True"/>
+					<!--
+					<avalonDockControls:LayoutDocumentControl Model="{Binding}" Drop="Drop_SetPanelActive"/>
+					-->
                 </DataTemplate>
             </Setter.Value>
         </Setter>
