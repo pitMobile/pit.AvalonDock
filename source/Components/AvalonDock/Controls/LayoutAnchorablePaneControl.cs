@@ -1,4 +1,4 @@
-﻿/************************************************************************
+/************************************************************************
    AvalonDock
 
    Copyright (C) 2007-2013 Xceed Software Inc.
@@ -8,6 +8,7 @@
  ************************************************************************/
 
 using AvalonDock.Layout;
+
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -104,6 +105,12 @@ namespace AvalonDock.Controls
 			if (!e.Handled && _model?.SelectedContent != null) _model.SelectedContent.IsActive = true;
 		}
 
+		protected override void OnDrop(DragEventArgs e)
+		{
+			base.OnDrop(e);
+			SetIsActive();
+		}
+
 		#endregion Overrides
 
 		#region Private Methods
@@ -113,6 +120,11 @@ namespace AvalonDock.Controls
 			var modelWithActualSize = _model as ILayoutPositionableElementWithActualSize;
 			modelWithActualSize.ActualWidth = ActualWidth;
 			modelWithActualSize.ActualHeight = ActualHeight;
+		}
+
+		private void SetIsActive()
+		{
+			if (_model?.SelectedContent != null) _model.SelectedContent.IsActive = true;
 		}
 
 		#endregion Private Methods
