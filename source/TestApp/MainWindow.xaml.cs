@@ -1,4 +1,4 @@
-﻿/************************************************************************
+/************************************************************************
    AvalonDock
 
    Copyright (C) 2007-2013 Xceed Software Inc.
@@ -7,19 +7,20 @@
    License (Ms-PL) as published at https://opensource.org/licenses/MS-PL
  ************************************************************************/
 
+using AvalonDock;
+using AvalonDock.Layout;
+using AvalonDock.Layout.Serialization;
+
 using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using AvalonDock.Layout;
-using System.Diagnostics;
-using System.IO;
-using AvalonDock.Layout.Serialization;
-using AvalonDock;
-using System.Diagnostics.CodeAnalysis;
 
 namespace TestApp
 {
@@ -28,6 +29,20 @@ namespace TestApp
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private void StackPanel_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (e.LeftButton == MouseButtonState.Pressed)
+			{
+				var currentPosition = e.GetPosition(null);
+
+				if (sender is FrameworkElement framework)
+				{
+					// Initialize the drag & drop operation
+					var dragData = new DataObject("test");
+					DragDrop.DoDragDrop(framework, dragData, DragDropEffects.Copy);
+				}
+			}
+		}
 
 		public MainWindow()
 		{
@@ -128,8 +143,8 @@ namespace TestApp
 			}
 		}
 
-        [SuppressMessage("Style", "IDE0063:使用简单的 \"using\" 语句", Justification = "<挂起>")]
-        private void OnLoadLayout(object sender, RoutedEventArgs e)
+		[SuppressMessage("Style", "IDE0063:使用简单的 \"using\" 语句", Justification = "<挂起>")]
+		private void OnLoadLayout(object sender, RoutedEventArgs e)
 		{
 			var currentContentsList = dockManager.Layout.Descendents().OfType<LayoutContent>().Where(c => c.ContentId != null).ToArray();
 
@@ -170,17 +185,17 @@ namespace TestApp
 			var firstDocumentPane = dockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
 			if (firstDocumentPane != null)
 			{
-                LayoutDocument doc = new LayoutDocument
-                {
-                    Title = "Test1"
-                };
-                firstDocumentPane.Children.Add(doc);
+				LayoutDocument doc = new LayoutDocument
+				{
+					Title = "Test1"
+				};
+				firstDocumentPane.Children.Add(doc);
 
-                LayoutDocument doc2 = new LayoutDocument
-                {
-                    Title = "Test2"
-                };
-                firstDocumentPane.Children.Add(doc2);
+				LayoutDocument doc2 = new LayoutDocument
+				{
+					Title = "Test2"
+				};
+				firstDocumentPane.Children.Add(doc2);
 			}
 
 			var leftAnchorGroup = dockManager.Layout.LeftSide.Children.FirstOrDefault();
@@ -252,15 +267,15 @@ namespace TestApp
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void OnNewFloatingWindow(object sender, RoutedEventArgs e)
-        {
-            var view = new TestUserControl();
-            var anchorable = new LayoutAnchorable()
-            {
-                Title = "Floating window with initial usercontrol size",
+		{
+			var view = new TestUserControl();
+			var anchorable = new LayoutAnchorable()
+			{
+				Title = "Floating window with initial usercontrol size",
 				Content = view
 			};
-            anchorable.AddToLayout(dockManager,AnchorableShowStrategy.Most);
-            anchorable.Float();
-        }
-    }
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+	}
 }
