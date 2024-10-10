@@ -126,11 +126,6 @@ namespace AvalonDock.Controls
 			SetIsActive();
 		}
 
-		private void SetIsActive()
-		{
-			_model.SelectedContent.IsActive = true;
-		}
-
 		protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
 		{
 			base.OnItemsChanged(e);
@@ -160,6 +155,11 @@ namespace AvalonDock.Controls
 			var modelWithAtcualSize = _model as ILayoutPositionableElementWithActualSize;
 			modelWithAtcualSize.ActualWidth = ActualWidth;
 			modelWithAtcualSize.ActualHeight = ActualHeight;
+		}
+
+		private void SetIsActive()
+		{
+			if (_model?.SelectedContent != null) _model.SelectedContent.IsActive = true;
 		}
 
 		#endregion Private Methods
